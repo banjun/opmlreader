@@ -49,6 +49,10 @@
     
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{ return YES; }
+
+#pragma mark -
+
 /**
     Returns the support folder for the application, used to store the Core Data
     store file.  This code uses a folder named "OPML_Reader" for
@@ -223,6 +227,8 @@
     [managedObjectModel release], managedObjectModel = nil;
     [super dealloc];
 }
+
+# pragma mark -
 
 - (IBAction)openOPMLFrom:(id)sender
 {

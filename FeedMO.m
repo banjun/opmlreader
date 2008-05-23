@@ -76,12 +76,15 @@
 		
         [tmpSet addObject:entry];
 	}
-    @synchronized(NSApp){
-        self.entries = [NSSet setWithSet:tmpSet];
-        [tmpSet unionSet:self.group.entries];
-        self.group.entries = [NSSet setWithSet:tmpSet];
-    }
+    [self performSelectorOnMainThread:@selector(relateEntries:) withObject:tmpSet waitUntilDone:YES];
 }
+- (void)relateEntries:(NSMutableSet *)tmpSet
+{
+    self.entries = [NSSet setWithSet:tmpSet];
+    [tmpSet unionSet:self.group.entries];
+    self.group.entries = [NSSet setWithSet:tmpSet];
+}
+
 - (void)feedRefreshingNotification:(NSNotification *)notif
 {
 	if (psfeed.refreshing) return;

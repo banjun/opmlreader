@@ -13,10 +13,29 @@
 
 + (Class)transformedValueClass { return [NSAttributedString class]; }
 + (BOOL)allowsReverseTransformation { return NO; }
-- (id)transformedValue:(NSString *)html {
-    return [[[NSAttributedString alloc] initWithHTML:[html dataUsingEncoding:NSUTF16StringEncoding
-                                                        allowLossyConversion:YES]
-                                  documentAttributes:nil] autorelease];
+
++ (NSDictionary *)attributes
+{
+    static NSDictionary *attrs = nil;
+    if (!attrs){
+        attrs = [[NSDictionary alloc] initWithObjectsAndKeys:
+                 [NSFont fontWithName:@"Hiragino Kaku Gothic ProN W6" size:11.0], NSFontAttributeName,
+                 [NSNumber numberWithFloat:12.0], NSTopMarginDocumentAttribute,
+                 [NSNumber numberWithFloat:12.0], NSLeftMarginDocumentAttribute,
+                 [NSNumber numberWithFloat:12.0], NSRightMarginDocumentAttribute,
+                 nil];
+    }
+    return attrs;
+}
+- (id)transformedValue:(NSString *)html
+{
+    NSData *htmlData = [html dataUsingEncoding:NSUTF16StringEncoding
+                          allowLossyConversion:YES];
+    NSMutableAttributedString *as = [[[NSMutableAttributedString alloc]
+                                      initWithHTML:htmlData documentAttributes:nil]
+                                     autorelease];
+    [as addAttributes:[[self class] attributes] range:NSMakeRange(0, [as length])];
+    return as;
 }
 
 @end
