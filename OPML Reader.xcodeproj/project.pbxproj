@@ -14,6 +14,7 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		BFABAA0F0DE5A57A0048B97A /* ProgressiveOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = EA336E7C0DE42D43009D0276 /* ProgressiveOperation.m */; };
+		BFABAC830DE737420048B97A /* AttributedStringFromHTMLString.m in Sources */ = {isa = PBXBuildFile; fileRef = BFABAC820DE737420048B97A /* AttributedStringFromHTMLString.m */; };
 		EA0C34940DE55808006C345C /* PubSub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA0C34930DE55808006C345C /* PubSub.framework */; };
 		EA336D340DE41E69009D0276 /* OPMLManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = EA336D330DE41E69009D0276 /* OPMLManagedObject.m */; };
 		EA336D3A0DE420AA009D0276 /* OPGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = EA336D390DE420AA009D0276 /* OPGroup.m */; };
@@ -35,6 +36,8 @@
 		77C8280C06725ACE000B614F /* OPML_Reader_AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPML_Reader_AppDelegate.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* OPML Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OPML Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFABAC810DE737420048B97A /* AttributedStringFromHTMLString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributedStringFromHTMLString.h; sourceTree = "<group>"; };
+		BFABAC820DE737420048B97A /* AttributedStringFromHTMLString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributedStringFromHTMLString.m; sourceTree = "<group>"; };
 		EA0C34930DE55808006C345C /* PubSub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PubSub.framework; path = /System/Library/Frameworks/PubSub.framework; sourceTree = "<absolute>"; };
 		EA336D320DE41E69009D0276 /* OPMLManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OPMLManagedObject.h; sourceTree = "<group>"; };
 		EA336D330DE41E69009D0276 /* OPMLManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OPMLManagedObject.m; sourceTree = "<group>"; };
@@ -66,6 +69,8 @@
 			children = (
 				77C8280B06725ACE000B614F /* OPML_Reader_AppDelegate.h */,
 				77C8280C06725ACE000B614F /* OPML_Reader_AppDelegate.m */,
+				BFABAC810DE737420048B97A /* AttributedStringFromHTMLString.h */,
+				BFABAC820DE737420048B97A /* AttributedStringFromHTMLString.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 				EA336D3A0DE420AA009D0276 /* OPGroup.m in Sources */,
 				EA336D4F0DE4234B009D0276 /* FeedMO.m in Sources */,
 				BFABAA0F0DE5A57A0048B97A /* ProgressiveOperation.m in Sources */,
+				BFABAC830DE737420048B97A /* AttributedStringFromHTMLString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

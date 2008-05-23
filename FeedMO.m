@@ -69,14 +69,11 @@
 															   inManagedObjectContext:[self managedObjectContext]];
 		
 		[entry setValue:e.title forKey:@"title"];
+        [entry setValue:[e.alternateURL absoluteString] forKey:@"urlString"];
 		[entry setValue:e.content.plainTextString forKey:@"entryDescription"];
 		[entry setValue:e.dateForDisplay forKey:@"datePosted"];
-//		[entry setValue:[[[NSAttributedString alloc] initWithHTML:[e.content.HTMLString dataUsingEncoding:NSUTF16StringEncoding
-//																   allowLossyConversion:YES]
-//											   documentAttributes:nil] autorelease]
-//				 forKey:@"attributedEntryDescription"];
+		[entry setValue:e.content.HTMLString forKey:@"HTMLDescription"];
 		
-        //[entry setValue:self.group forKey:@"group"];
         [tmpSet addObject:entry];
 	}
     @synchronized(NSApp){
@@ -95,22 +92,6 @@
                                 autorelease];
     [[[NSApp delegate] operationQueue] addOperation:op];
 }
-
-//- (void)parseRSS:(ProgressiveOperation *)op
-//{
-//	NSLog(@"loading %@", self.urlString);
-//	RSS *rss = [[[RSS alloc] initWithURL:[NSURL URLWithString:self.urlString] normalize:YES] autorelease];
-//	for (NSDictionary *itemDict in [rss newsItems]){
-//		NSManagedObject *entry = [NSEntityDescription insertNewObjectForEntityForName:@"Entry"
-//															   inManagedObjectContext:[self managedObjectContext]];
-//		
-//		[entry setValue:[itemDict objectForKey:@"title"] forKey:@"title"];
-//		[entry setValue:[itemDict objectForKey:@"description"] forKey:@"entryDescription"];
-//		[entry setValue:[itemDict objectForKey:@"datePosted"] forKey:@"datePosted"];
-//		
-//		[self addEntriesObject:entry];
-//	}
-//}
 
 
 @end

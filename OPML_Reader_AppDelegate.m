@@ -10,14 +10,44 @@
 #import "OPMLManagedObject.h"
 
 @interface OPML_Reader_AppDelegate()
-@property (retain,readwrite) NSArray *opmls;
+- (void)openOPMLFromURL:(NSURL *)url;
 @end
 
 
 @implementation OPML_Reader_AppDelegate
 
-@synthesize opmls;
 
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
+{
+    [entriesController setSortDescriptors:[NSArray arrayWithObject:
+                                           [[[NSSortDescriptor alloc]
+                                             initWithKey:@"datePosted"
+                                             ascending:NO] autorelease]]];
+    for (NSString *opmlURL in [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"OPMLURLs"]){
+        [self openOPMLFromURL:[NSURL URLWithString:opmlURL]];
+    }
+}
+
+- (void)saveOPMLs
+{
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:[NSEntityDescription entityForName:@"OPML" inManagedObjectContext:[self managedObjectContext]]];
+    NSMutableArray *urls = [NSMutableArray array];
+    for (OPMLManagedObject *mo in [[self managedObjectContext] executeFetchRequest:request error:nil]){
+        if ([mo isDeleted] || [mo.groups count] == 0) continue;
+        [urls addObject:mo.urlString];
+    }
+    [[[NSUserDefaultsController sharedUserDefaultsController] values] setValue:urls forKey:@"OPMLURLs"];
+}
+
+        
+- (void)openOPMLFromURL:(NSURL *)url
+{
+    OPMLManagedObject *mo = [OPMLManagedObject insertWithURL:url
+                                                         moc:[self managedObjectContext]];
+    if (mo) [self saveOPMLs];
+    
+}
 
 /**
     Returns the support folder for the application, used to store the Core Data
@@ -141,6 +171,7 @@
     NSError *error;
     int reply = NSTerminateNow;
 	
+    [self saveOPMLs];
 	return NSTerminateNow; // force quit without save.
     
     if (managedObjectContext != nil) {
@@ -193,13 +224,41 @@
     [super dealloc];
 }
 
-
 - (IBAction)openOPMLFrom:(id)sender
 {
-	
-	[OPMLManagedObject insertWithURL:[NSURL URLWithString:[sender stringValue]]
-								 moc:[self managedObjectContext]];
+    [self openOPMLFromURL:[NSURL URLWithString:[sender stringValue]]];
 }
+
+- (IBAction)manageOPML:(id)sender
+{
+    [NSApp beginSheet:manageOpmlSheet
+       modalForWindow:window
+        modalDelegate:self
+       didEndSelector:@selector(manageOPMLDidEnd:returnCode:context:)
+          contextInfo:nil];
+}
+- (IBAction)addOPML:(id)sender
+{
+    [self openOPMLFrom:opmlURLField];
+    [opmlURLField setStringValue:@""];
+    [NSApp endSheet:manageOpmlSheet returnCode:NSOKButton];
+}
+- (IBAction)cancelManageOPML:(id)sender
+{
+    [opmlURLField setStringValue:@""];
+    [NSApp endSheet:manageOpmlSheet returnCode:NSCancelButton];    
+}
+- (void)manageOPMLDidEnd:(NSWindow *)sheet returnCode:(int)returnCode context:(void *)context
+{
+    [sheet close];
+}
+
+- (IBAction)openEntry:(id)sender
+{
+    NSURL *url = [NSURL URLWithString:[sender valueForKey:@"urlString"]];
+    [[NSWorkspace sharedWorkspace] openURL:url];
+}
+
 
 - (NSOperationQueue *)operationQueue
 {

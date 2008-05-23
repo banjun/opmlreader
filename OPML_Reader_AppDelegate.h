@@ -16,8 +16,11 @@
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
 
-	NSArray *opmls;
 	NSOperationQueue *operationQueue;
+    IBOutlet NSWindow *manageOpmlSheet;
+    IBOutlet NSTextField *opmlURLField;
+    
+    IBOutlet NSArrayController *entriesController;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator;
@@ -27,9 +30,11 @@
 - (IBAction)saveAction:sender;
 
 - (IBAction)openOPMLFrom:(id)sender;
+- (IBAction)manageOPML:(id)sender;
+- (IBAction)addOPML:(id)sender;
+- (IBAction)cancelManageOPML:(id)sender;
+- (IBAction)openEntry:(id)sender;
 
 - (NSOperationQueue *)operationQueue;
-
-@property (retain,readonly) NSArray *opmls;
 
 @end
