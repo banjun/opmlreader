@@ -8,6 +8,7 @@
 
 #import "OPML_Reader_AppDelegate.h"
 #import "OPMLManagedObject.h"
+#import "FeedMO.h"
 
 @interface OPML_Reader_AppDelegate()
 - (void)openOPMLFromURL:(NSURL *)url;
@@ -25,6 +26,23 @@
                                              ascending:NO] autorelease]]];
     for (NSString *opmlURL in [[[NSUserDefaultsController sharedUserDefaultsController] values] valueForKey:@"OPMLURLs"]){
         [self openOPMLFromURL:[NSURL URLWithString:opmlURL]];
+    }
+    [NSTimer scheduledTimerWithTimeInterval:5*60
+                                     target:self
+                                   selector:@selector(refresh:)
+                                   userInfo:nil
+                                    repeats:YES];
+}
+- (void)refresh:(NSTimer *)timer
+{
+    // NSLog(@"refreshing");
+    // fixme: todo: opml refresh
+    
+    // refresh feeds
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:[NSEntityDescription entityForName:@"Feed" inManagedObjectContext:[self managedObjectContext]]];
+    for (FeedMO *mo in [[self managedObjectContext] executeFetchRequest:request error:nil]){
+        [mo refresh];
     }
 }
 
@@ -45,8 +63,9 @@
 {
     OPMLManagedObject *mo = [OPMLManagedObject insertWithURL:url
                                                          moc:[self managedObjectContext]];
-    if (mo) [self saveOPMLs];
-    
+    if (mo){
+        [self saveOPMLs];
+    }
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{ return YES; }

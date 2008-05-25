@@ -24,6 +24,8 @@
 @property (retain) OPGroup * group;
 @property (retain) NSSet* entries;
 
+- (void)refresh;
+
 @end
 
 @interface FeedMO (CoreDataGeneratedAccessors)

@@ -52,6 +52,10 @@
     
     [psfeed refresh:nil];
 }
+- (void)refresh
+{
+    [psfeed refresh:nil];
+}
 
 - (void)deallc
 {
@@ -65,11 +69,16 @@
 {
     NSMutableSet *tmpSet = [NSMutableSet set];
 	for (PSEntry *e in [psfeed entries]){
+        NSString *urlString = [e.alternateURL absoluteString];
+        if ([[self.entries filteredSetUsingPredicate:
+             [NSPredicate predicateWithFormat:@"urlString = %@", urlString]] count] > 0){
+            continue;
+        }
 		NSManagedObject *entry = [NSEntityDescription insertNewObjectForEntityForName:@"Entry"
 															   inManagedObjectContext:[self managedObjectContext]];
 		
 		[entry setValue:e.title forKey:@"title"];
-        [entry setValue:[e.alternateURL absoluteString] forKey:@"urlString"];
+        [entry setValue:urlString forKey:@"urlString"];
 		[entry setValue:e.content.plainTextString forKey:@"entryDescription"];
 		[entry setValue:e.dateForDisplay forKey:@"datePosted"];
 		[entry setValue:e.content.HTMLString forKey:@"HTMLDescription"];
@@ -80,7 +89,9 @@
 }
 - (void)relateEntries:(NSMutableSet *)tmpSet
 {
+    [tmpSet unionSet:self.entries];
     self.entries = [NSSet setWithSet:tmpSet];
+    
     [tmpSet unionSet:self.group.entries];
     self.group.entries = [NSSet setWithSet:tmpSet];
 }
@@ -95,6 +106,5 @@
                                 autorelease];
     [[[NSApp delegate] operationQueue] addOperation:op];
 }
-
 
 @end
