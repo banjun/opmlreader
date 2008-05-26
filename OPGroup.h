@@ -20,7 +20,7 @@
 @property (retain) NSSet* feeds;
 @property (retain) OPMLManagedObject * opml;
 
-@property (retain, readwrite) NSSet *entries;
+//@property (retain, readwrite) NSSet *entries;
 
 @end
 

@@ -82,6 +82,8 @@
 		[entry setValue:e.content.plainTextString forKey:@"entryDescription"];
 		[entry setValue:e.dateForDisplay forKey:@"datePosted"];
 		[entry setValue:e.content.HTMLString forKey:@"HTMLDescription"];
+        
+        [entry setValue:self forKey:@"feed"];
 		
         [tmpSet addObject:entry];
 	}
@@ -89,11 +91,11 @@
 }
 - (void)relateEntries:(NSMutableSet *)tmpSet
 {
-    [tmpSet unionSet:self.entries];
-    self.entries = [NSSet setWithSet:tmpSet];
+//    [tmpSet unionSet:self.entries];
+//    self.entries = [NSSet setWithSet:tmpSet];
     
-    [tmpSet unionSet:self.group.entries];
-    self.group.entries = [NSSet setWithSet:tmpSet];
+    // update Fetched Property
+    [[self managedObjectContext] refreshObject:self.group mergeChanges:YES];
 }
 
 - (void)feedRefreshingNotification:(NSNotification *)notif

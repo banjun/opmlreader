@@ -15,7 +15,7 @@
 @dynamic title;
 @dynamic feeds;
 @dynamic opml;
-@dynamic entries;
+// @dynamic entries;
 
 + (OPGroup *)insertWithXMLElement:(NSXMLElement *)element moc:(NSManagedObjectContext *)moc
 {

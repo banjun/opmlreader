@@ -9,7 +9,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="29"/>
-			<integer value="683"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1939,6 +1939,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 					<string>feeds.entries</string>
 					<string>entries</string>
 					<string>opml.title</string>
+					<string>fetchedEntries</string>
 				</object>
 				<string key="NSObjectClassName">OPGroup</string>
 				<bool key="NSEditable">YES</bool>
@@ -2652,62 +2653,6 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentArrayForMultipleSelection: selection.feeds</string>
-						<reference key="source" ref="388631675"/>
-						<reference key="destination" ref="935463682"/>
-						<object class="NSNibBindingConnector" key="connector" id="822219834">
-							<reference key="NSSource" ref="388631675"/>
-							<reference key="NSDestination" ref="935463682"/>
-							<string key="NSLabel">contentArrayForMultipleSelection: selection.feeds</string>
-							<string key="NSBinding">contentArrayForMultipleSelection</string>
-							<string key="NSKeyPath">selection.feeds</string>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">519</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">contentSet: selection.entries</string>
-						<reference key="source" ref="388631675"/>
-						<reference key="destination" ref="935463682"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="388631675"/>
-							<reference key="NSDestination" ref="935463682"/>
-							<string key="NSLabel">contentSet: selection.entries</string>
-							<string key="NSBinding">contentSet</string>
-							<string key="NSKeyPath">selection.entries</string>
-							<object class="NSDictionary" key="NSOptions">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSMutableArray" key="dict.sortedKeys">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>NSAlwaysPresentsApplicationModalAlerts</string>
-									<string>NSConditionallySetsEditable</string>
-									<string>NSDeletesObjectsOnRemove</string>
-									<string>NSHandlesContentAsCompoundValue</string>
-									<string>NSRaisesForNotApplicableKeys</string>
-									<string>NSSelectsAllWhenSettingContent</string>
-									<string>NSValidatesImmediately</string>
-								</object>
-								<object class="NSMutableArray" key="dict.values">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<reference ref="8"/>
-									<reference ref="8"/>
-									<reference ref="8"/>
-									<reference ref="8"/>
-									<reference ref="9"/>
-									<reference ref="8"/>
-									<reference ref="8"/>
-								</object>
-							</object>
-							<reference key="NSPreviousConnector" ref="822219834"/>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">520</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
 						<string key="label">managedObjectContext: managedObjectContext</string>
 						<reference key="source" ref="935463682"/>
 						<reference key="destination" ref="203189396"/>
@@ -2998,6 +2943,54 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 						</object>
 					</object>
 					<int key="connectionID">699</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArray: selection.fetchedEntries</string>
+						<reference key="source" ref="388631675"/>
+						<reference key="destination" ref="935463682"/>
+						<object class="NSNibBindingConnector" key="connector" id="461714590">
+							<reference key="NSSource" ref="388631675"/>
+							<reference key="NSDestination" ref="935463682"/>
+							<string key="NSLabel">contentArray: selection.fetchedEntries</string>
+							<string key="NSBinding">contentArray</string>
+							<string key="NSKeyPath">selection.fetchedEntries</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">721</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">contentArrayForMultipleSelection: selection.fetchedEntries</string>
+						<reference key="source" ref="388631675"/>
+						<reference key="destination" ref="935463682"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="388631675"/>
+							<reference key="NSDestination" ref="935463682"/>
+							<string key="NSLabel">contentArrayForMultipleSelection: selection.fetchedEntries</string>
+							<string key="NSBinding">contentArrayForMultipleSelection</string>
+							<string key="NSKeyPath">selection.fetchedEntries</string>
+							<object class="NSDictionary" key="NSOptions">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSMutableArray" key="dict.sortedKeys">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>NSConditionallySetsEditable</string>
+									<string>NSRaisesForNotApplicableKeys</string>
+									<string>NSSelectsAllWhenSettingContent</string>
+								</object>
+								<object class="NSMutableArray" key="dict.values">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<integer value="0" id="6"/>
+									<integer value="1"/>
+									<reference ref="6"/>
+								</object>
+							</object>
+							<reference key="NSPreviousConnector" ref="461714590"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">722</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -4612,7 +4605,7 @@ ELIAAAAAAAgACAAIAAgAAQABAAEAAQ</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">699</int>
+			<int key="maxID">722</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
