@@ -20,6 +20,9 @@
     IBOutlet NSWindow *manageOpmlSheet;
     IBOutlet NSTextField *opmlURLField;
     
+    IBOutlet NSView *groupsView;
+    IBOutlet NSArrayController *groupsController;
+    IBOutlet NSView *entriesView;
     IBOutlet NSArrayController *entriesController;
 }
 

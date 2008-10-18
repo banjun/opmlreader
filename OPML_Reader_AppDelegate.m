@@ -294,5 +294,37 @@
 	return operationQueue;
 }
 
+#pragma mark -
+
+- (BOOL)respondsToSelector:(SEL)aSelector
+{
+    if (aSelector == @selector(copy:)){
+        NSResponder *firstResponder = [window firstResponder];
+        return (([firstResponder isEqualTo:groupsView] && [groupsController selectionIndex] != NSNotFound) ||
+                ([firstResponder isEqualTo:entriesView] && [entriesController selectionIndex] != NSNotFound));
+    }
+    return [super respondsToSelector:aSelector];
+}
+- (IBAction)copy:(id)sender
+{
+    NSResponder *firstResponder = [window firstResponder];
+    NSURL *copiedURL = nil;
+    
+    if ([firstResponder isEqualTo:groupsView]){
+        NSManagedObject *mo = [groupsController selection];
+        copiedURL = [NSURL URLWithString:[mo valueForKeyPath:@"opml.urlString"]];
+    }
+    if ([firstResponder isEqualTo:entriesView]){
+        NSManagedObject *mo = [entriesController selection];
+        copiedURL = [NSURL URLWithString:[mo valueForKey:@"urlString"]];
+    }
+    
+    if (copiedURL){
+        NSPasteboard *pboard = [NSPasteboard generalPasteboard];
+        [pboard declareTypes:[NSArray arrayWithObject:NSURLPboardType] owner:nil];
+        [copiedURL writeToPasteboard:pboard];
+    }
+}
+
 
 @end
